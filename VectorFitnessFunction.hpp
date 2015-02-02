@@ -23,8 +23,12 @@ public:
      * Use individual.setFitness(fitness) to assign the fitness to the individual once calculated.
      */
     void evaluate(VectorIndividual& individual){
-        /* TODO: YOUR CODE HERE */
-
+        double fitness = 0;
+        for (int i = 0; i < individual.size(); i++) {
+            fitness += individual[i];
+        }
+        fitness = fitness / individual.size ();
+        individual.setFitness( fitness );
     }
 };
 
