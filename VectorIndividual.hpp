@@ -44,10 +44,8 @@ public:
      * of being re-assigned a value between _min and _max.
      */
     void mutate(){
-        double individualsToMutate = this->size() * _mutationRate;
-
-        for (int i = 0; i < individualsToMutate ; i++) {
-            _valueVector[ randDouble( individualsToMutate ) ] = randDouble( _min, _max );
+        for (int i = 0; i < this->size() * _mutationRate ; i++) {
+            _valueVector[ randDouble(this->size()) ] = randDouble( _min, _max );
         }
     }
 
