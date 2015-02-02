@@ -32,8 +32,9 @@ public:
      * between _min and _mix.
      */
     void randomize(){
-        /* TODO: YOUR CODE HERE */
-
+        for (int i = 0; i < this->size(); i++) {
+            _valueVector[i] = randDouble(_min, _max );
+        }
     }
 
     /**
