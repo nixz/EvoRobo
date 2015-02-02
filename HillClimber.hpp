@@ -68,21 +68,23 @@ public:
      * if(myFile.is_open()) myFile << myValue << "\n";
      */
     void run(size_t numberOfGenerations, std::string fitnessFileName = "", std::string individualFileName = ""){
-        _child = _parent;
-        _child.mutate();
-        _fitnessFunction.evaluated( _child );
-        if (_child.getFitness() > _parent.getFitness() ) {
-            _parent=_child;
-        }
 
         std::ofstream fitnessFile;
-        if(fitnessFileName != "") fitnessFile.open(fitnessFileName.c_str());
-        if(fitnessFile.is_open()) fitnessFile << _parent.getFitness() << "\n";
-
         std::ofstream individualFile;
-        if(individualFileName != "") individualFile.open(individualFileName.c_str());
-        if(individualFile.is_open()) individualFile << _parent << "\n";
 
+        if(fitnessFileName != "") fitnessFile.open(fitnessFileName.c_str());
+        if(individualFileName != "") individualFile.open(individualFileName.c_str());
+
+        for (int i=0; i < numberOfGenerations; i++) {
+            _child = _parent;
+            _child.mutate();
+            _fitnessFunction.evaluate( _child );
+            if (_child.getFitness() > _parent.getFitness() ) {
+                _parent=_child;
+            }
+            if(fitnessFile.is_open()) fitnessFile << _parent.getFitness() << "\n";
+            if(individualFile.is_open()) individualFile << _parent << "\n";
+        }
     }
 
     /**
@@ -103,8 +105,6 @@ private:
     Indiv _parent;
     Indiv _child;
     Fit _fitnessFunction;
-
-    /* TODO: YOUR CODE HERE IF YOU LIKE */
 };
 
 
