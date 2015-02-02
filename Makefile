@@ -2,4 +2,4 @@ hillClimber: main.cpp HillClimber.hpp Individual.hpp Random.hpp VectorFitnessFun
 	g++ main.cpp -o hillClimber
 
 clean:
-	rm hillClimber
+	rm hillClimber *.csv *.pdf
