@@ -32,7 +32,10 @@ public:
      *   _fitnessFunction.evaluate(_parent); to do so).
      */
     void init(Indiv initialIndividual, Fit fitnessFunction){
-        /* TODO: YOUR CODE HERE */
+        _fitnessFunction = fitnessFunction;
+        _parent = initialIndividual;
+        _parent.randomize();
+        _fitnessFunction.evaluate( _parent );
     }
 
     /**
@@ -65,7 +68,21 @@ public:
      * if(myFile.is_open()) myFile << myValue << "\n";
      */
     void run(size_t numberOfGenerations, std::string fitnessFileName = "", std::string individualFileName = ""){
-        /* TODO: YOUR CODE HERE */
+        _child = _parent;
+        _child.mutate();
+        _fitnessFunction.evaluated( _child );
+        if (_child.getFitness() > _parent.getFitness() ) {
+            _parent=_child;
+        }
+
+        std::ofstream fitnessFile;
+        if(fitnessFileName != "") fitnessFile.open(fitnessFileName.c_str());
+        if(fitnessFile.is_open()) fitnessFile << _parent.getFitness() << "\n";
+
+        std::ofstream individualFile;
+        if(individualFileName != "") individualFile.open(individualFileName.c_str());
+        if(individualFile.is_open()) individualFile << _parent << "\n";
+
     }
 
     /**
