@@ -42,3 +42,29 @@
          :documentation "fitness value of the individual"))
   (:documentation "The base class for every individual so you can assign a
   fitness to it"))
+
+;;; ---------------------------------------------------------------------------
+(defclass vector-individual (individual)
+  ((value-vector :initarg :value-vector
+         :initform (error ":value-vector must be specified")
+         :accessor value-vector
+         :allocation :instance
+         :documentation "holds the array of genes")
+   (min :initarg :min
+         :initform (error ":min must be specified")
+         :accessor min
+         :allocation :instance
+         :documentation "the min value")
+   (max :initarg :max
+         :initform (error ":max must be specified")
+         :accessor max
+         :allocation :instance
+         :documentation "the max value")
+   (mutation-rate :initarg :mutation-rate
+         :initform (error ":mutation-rate must be specified")
+         :accessor mutation-rate
+         :allocation :instance
+         :documentation "the rate of mutation"))
+  (:documentation "An individual that consists of a vector of doubles. Note
+  that hte minimum, maximum and mutation rate are all stored with the
+  individual"))
