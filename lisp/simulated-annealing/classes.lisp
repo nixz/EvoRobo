@@ -78,3 +78,15 @@ with other optional keys like min,max and mutation-rate"
                        :min min
                        :max max
                        :mutation-rate mutation-rate))
+
+(defgeneric randomize (individual))
+
+(defgeneric randomize ((entity vector-individual) )
+  "
+Randomizes the vector
+**********************
+Implement such that each element in the vector is assigned a random value
+between min and max"
+  (with-slots (value-vector min max) entity
+    (dotimes (i (array-total-size value-vector))
+      (setf (elt value-vector i) (random )))))
