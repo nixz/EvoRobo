@@ -68,3 +68,13 @@
   (:documentation "An individual that consists of a vector of doubles. Note
   that hte minimum, maximum and mutation rate are all stored with the
   individual"))
+
+;;; ---------------------------------------------------------------------------
+(defun make-vector-individual (&key size (min 0.0) (max 1.0) (mutation-rate 0.05))
+  "A constructor to construct a vetor individual. The size has to be specified
+with other optional keys like min,max and mutation-rate"
+  (initialize-instance 'vector-individual
+                       :value-vector (make-array size)
+                       :min min
+                       :max max
+                       :mutation-rate mutation-rate))
