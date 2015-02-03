@@ -32,3 +32,13 @@
 ;;;; ==========================================================================
 
 (in-package #:sa)
+
+;;; ---------------------------------------------------------------------------
+(defclass individual ( )
+  ((fitness :initarg :fitness
+         :initform 0
+         :accessor fitness
+         :allocation :instance
+         :documentation "fitness value of the individual"))
+  (:documentation "The base class for every individual so you can assign a
+  fitness to it"))
