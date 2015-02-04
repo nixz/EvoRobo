@@ -52,12 +52,12 @@
          :documentation "holds the array of genes")
    (min :initarg :min
          :initform (error ":min must be specified")
-         :accessor min
+         :accessor range-min
          :allocation :instance
          :documentation "the min value")
    (max :initarg :max
          :initform (error ":max must be specified")
-         :accessor max
+         :accessor range-max
          :allocation :instance
          :documentation "the max value")
    (mutation-rate :initarg :mutation-rate
@@ -87,6 +87,7 @@ Randomizes the vector
 **********************
 Implement such that each element in the vector is assigned a random value
 between min and max"
-  (with-slots (value-vector min max) entity
+  (with-slots (value-vector range-min range-max) entity
     (dotimes (i (array-total-size value-vector))
-      (setf (elt value-vector i) (random )))))
+      (setf (elt value-vector i) (rand :min range-min
+                                       :max range-max)))))
