@@ -99,7 +99,7 @@ Randomizes the vector
 Implement such that each element in the vector is assigned a random value
 between min and max"
   (with-slots (value-vector range-min range-max) entity
-    (dotimes (i (array-total-size value-vector))
+    (dotimes (i (size entity))
       (setf (elt value-vector i) (rand :min range-min
                                        :max range-max)))))
 
