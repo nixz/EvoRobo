@@ -82,6 +82,7 @@ with other optional keys like min,max and mutation-rate"
 ;;; ---------------------------------------------------------------------------
 (defgeneric size (individual))
 (defgeneric randomize (individual))
+(defgeneric mutate (individial))
 
 ;;; ---------------------------------------------------------------------------
 (defmethod size ((entity vector-individual))
@@ -101,3 +102,18 @@ between min and max"
     (dotimes (i (array-total-size value-vector))
       (setf (elt value-vector i) (rand :min range-min
                                        :max range-max)))))
+
+;;; ---------------------------------------------------------------------------
+(defmethod mutate ((entity vector-individual))
+  "
+Mutates the vector
+*******************
+
+Implement such that each element in the vector has a _mutationRate chance of
+being re-assigned a value between _min and _max.
+"
+  (with-slots (value-vector range-min range-max mutation-rate) entity
+    (dotimes (i (* mutation-rate (array-total-size value-vector)))
+      (setf (elt value-vector (rand :max (size entity)))
+            (rand :min range-min
+                  :max range-max)))))
