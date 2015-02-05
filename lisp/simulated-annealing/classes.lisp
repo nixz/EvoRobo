@@ -83,6 +83,7 @@ with other optional keys like min,max and mutation-rate"
 (defgeneric size (individual))
 (defgeneric randomize (individual))
 (defgeneric mutate (individial))
+(defgeneric fitness (individual))
 
 ;;; ---------------------------------------------------------------------------
 (defmethod size ((entity vector-individual))
@@ -117,3 +118,19 @@ being re-assigned a value between _min and _max.
       (setf (elt value-vector (rand :max (size entity)))
             (rand :min range-min
                   :max range-max)))))
+
+;;; ---------------------------------------------------------------------------
+(defmethod fitness ((entity vector-individual))
+  " 
+Calculates the fitness funtion of the individual
+************************************************
+
+Function that evaluates and individual and returns its fitness. Implement
+such that the fitness of the vector is the average of its elements. Use
+individual.setFitness(fitness) to assign the fitness to the individual once
+calculated.
+"
+  (with-slots (value-vector fitness) entity
+    (setf fitness (/ (reduce #'+ value-vector)
+                     (length value-vector)))))
+
