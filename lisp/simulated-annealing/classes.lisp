@@ -88,7 +88,7 @@ with other optional keys like min,max and mutation-rate"
 (defmethod size ((entity vector-individual))
   "Returns the size of the vector"
   (with-slots (value-vector) entity
-    (array-total-size value-vector)))
+    (length value-vector)))
 
 ;;; ---------------------------------------------------------------------------
 (defmethod randomize ((entity vector-individual) )
