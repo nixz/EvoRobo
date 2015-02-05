@@ -81,7 +81,7 @@ with other optional keys like min,max and mutation-rate"
 
 (defgeneric randomize (individual))
 
-(defgeneric randomize ((entity vector-individual) )
+(defmethod randomize ((entity vector-individual) )
   "
 Randomizes the vector
 **********************
