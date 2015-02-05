@@ -79,12 +79,22 @@ with other optional keys like min,max and mutation-rate"
                        :max max
                        :mutation-rate mutation-rate))
 
+;;; ---------------------------------------------------------------------------
+(defgeneric size (individual))
 (defgeneric randomize (individual))
 
+;;; ---------------------------------------------------------------------------
+(defmethod size ((entity vector-individual))
+  "Returns the size of the vector"
+  (with-slots (value-vector) entity
+    (array-total-size value-vector)))
+
+;;; ---------------------------------------------------------------------------
 (defmethod randomize ((entity vector-individual) )
   "
 Randomizes the vector
 **********************
+
 Implement such that each element in the vector is assigned a random value
 between min and max"
   (with-slots (value-vector range-min range-max) entity
