@@ -34,5 +34,6 @@
   :description "Simulated Annealing Package file"
   :depends-on (cl-opengl)
   :components ((:file "package")
-               (:file "classes" :depends-on ("package"))
+               (:file "random" :depends-on ("package"))
+               (:file "classes" :depends-on ("random"))
                ))
