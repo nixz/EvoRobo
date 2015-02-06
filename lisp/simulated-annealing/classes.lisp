@@ -126,9 +126,7 @@ Calculates the fitness funtion of the individual
 ************************************************
 
 Function that evaluates and individual and returns its fitness. Implement
-such that the fitness of the vector is the average of its elements. Use
-individual.setFitness(fitness) to assign the fitness to the individual once
-calculated.
+such that the fitness of the vector is the average of its elements.
 "
   (with-slots (value-vector fitness) entity
     (setf fitness (/ (reduce #'+ value-vector)
