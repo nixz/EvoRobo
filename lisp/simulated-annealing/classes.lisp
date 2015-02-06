@@ -80,6 +80,15 @@ with other optional keys like min,max and mutation-rate"
                        :mutation-rate mutation-rate))
 
 ;;; ---------------------------------------------------------------------------
+(defclass hill-climber ()
+  ((parent :initarg :parent
+         :initform (error ":parent must be specified")
+         :type 'individal
+         :allocation :instance
+         :documentation "The parent individual"))
+  (:documentation "Implements the hillclimber algorithm"))
+
+;;; ---------------------------------------------------------------------------
 (defgeneric size (individual))
 (defgeneric randomize (individual))
 (defgeneric mutate (individial))
