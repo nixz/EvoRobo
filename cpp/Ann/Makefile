@@ -1,5 +1,5 @@
-hillClimber: main.cpp HillClimber.hpp Individual.hpp Random.hpp VectorFitnessFunction.hpp VectorIndividual.hpp
-	g++ main.cpp -o hillClimber
+ann: main.cpp NeuralNetwork.hpp HillClimber.hpp Individual.hpp Random.hpp VectorFitnessFunction.hpp VectorIndividual.hpp
+	g++ main.cpp -o ann
 
 clean:
-	rm hillClimber *.csv *.pdf
+	rm ann *.csv *.pdf
