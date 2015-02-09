@@ -13,6 +13,7 @@
 
 /* Assignment 1 */
 #include "HillClimber.hpp"
+#include "NeuralNetwork.hpp"
 #include "VectorIndividual.hpp"
 #include "VectorFitnessFunction.hpp"
 #include "Random.hpp"
