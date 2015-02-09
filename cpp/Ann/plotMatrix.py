@@ -29,6 +29,7 @@ def readFile(filename):
    return matrix
 
 for arg in sys.argv[1:]:
+    print arg
     matrix = readFile(arg)
     numpyMatrix = toNumpyMatrix(matrix)
     numpyMatrix.transpose()
