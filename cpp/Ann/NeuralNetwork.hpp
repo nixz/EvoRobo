@@ -109,8 +109,9 @@ public:
      * the number of neurons in the network.
      */
     NeuralNetwork(size_t numberOfNeurons = 0){
-        //TODO: YOUR CODE HERE
-
+        for (int i = 0; i < numberOfNeurons; i++) {
+            _neurons.push_back(Neuron( numberOfNeurons ));
+        }
     }
 
 
@@ -134,8 +135,19 @@ public:
      * update the current value.
      */
     void step(){
-        //TODO: YOUR CODE HERE
-
+        for (int i =0 ; i < _neurons.size(); i++) {
+            double sum = 0.0;
+            for (int j=0; j < _neurons.size(); j++) {
+                sum+=_neurons[i].getConnection( j )*_neurons[j].getValue();
+            }
+            _neurons[i].setNewValue( sum );
+            if ( sum > 1.0 ) {
+                _neurons[i].setValue( 1.0 );
+            }
+            if ( sum < 0.0 ) {
+                _neurons[i].setValue( 0.0 );
+            }
+        }
     }
 
 
@@ -147,8 +159,10 @@ public:
      * and write an end-of-line ("\n") once all values have been written.
      */
     void logActivation(std::ofstream& activationFile){
-        //TODO: YOUR CODE HERE
-
+        for (int i =0 ; i < _neurons.size(); i++) {
+            activationFile << _neurons[i].getValue() << " ";
+        }
+        activationFile << "\n";
     }
 
 
@@ -159,8 +173,11 @@ public:
      * in [-1, 1]. Note that you can reuse the randomize function of your vectorIndividual.
      */
     void randomize(){
-        //TODO: YOUR CODE HERE
-
+        for (int i =0 ; i < _neurons.size(); i++) {
+            for (int j = 0; j < _neurons.size(); j++) {
+                _neurons[i].setConnection( j, randDouble( -1, 1 ) );
+            }
+        }
     }
 
 
