@@ -15,5 +15,11 @@
 #include "NeuralNetwork.hpp"
 
 int main(int argc, char* argv[]) {
+    NeuralNetwork network( 50 );
+    network.randomize();
+    std::ofstream networkFile("hw2_network.csv");
+    networkFile << network << "\n";
+    networkFile.close();
+
     return 0;
 }
