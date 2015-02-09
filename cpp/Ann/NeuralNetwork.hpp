@@ -143,11 +143,15 @@ public:
             }
             _neurons[i].setNewValue( sum );
             if ( sum > 1.0 ) {
-                _neurons[i].setValue( 1.0 );
+                _neurons[i].setNewValue( 1.0 );
             }
             if ( sum < 0.0 ) {
-                _neurons[i].setValue( 0.0 );
+                _neurons[i].setNewValue( 0.0 );
             }
+        }
+        // Update new value
+        for (int i =0 ; i < _neurons.size(); i++) {
+            _neurons[i].setValue( _neurons[i].getNewValue() );
         }
     }
 
