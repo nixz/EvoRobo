@@ -80,6 +80,38 @@ with other optional keys like min,max and mutation-rate"
                        :mutation-rate mutation-rate))
 
 ;;; ---------------------------------------------------------------------------
+(defclass neuron ( )
+  ((value :initarg :value
+         :initform 0
+         :allocation :instance
+         :documentation "the value of the neuron")
+   (new-value :initarg :new-value
+         :initform 0
+         :allocation :instance
+         :documentation "where whe new value is stored")
+   (incomming-connections :initarg :incomming-connections
+         :type 'vector-individual
+         :allocation :instance
+         :documentation "all the incoming connection into the neuron"))
+  (:documentation "
+A simple neuron class without activation function.
+
+Note that this class is mostly appropriate for fully connected networks;
+sparsely connected networks should consider a graph like network instead.
+
+Also note that this class supports recurrent connections. If the network is
+feed-forward, a simpler neuron model can be used."))
+
+;;; ---------------------------------------------------------------------------
+(defun make-neuron (&key incomming-connections-size)
+  (initialize-instance 'make-neuron
+                       :value 0
+                       :new-value 0
+                       :incomming-connections
+                       (make-vector-individual :size incomming-connections-size)
+                       ))
+
+;;; ---------------------------------------------------------------------------
 (defclass hill-climber ()
   ((parent :initarg :parent
          :initform (error ":parent must be specified")
