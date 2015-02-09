@@ -9,6 +9,7 @@
 #define NEURALNETWORK_HPP_
 
 #include <vector>
+#include <fstream>
 
 #include "VectorIndividual.hpp"
 #include "Random.hpp"
