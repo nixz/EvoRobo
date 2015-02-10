@@ -111,6 +111,20 @@ feed-forward, a simpler neuron model can be used."))
                        (make-vector-individual :size incomming-connections-size)))
 
 ;;; ---------------------------------------------------------------------------
+(defclass neural-network (individual)
+  ((neurons :initarg :neurons
+         :initform nil
+         :allocation :instance
+         :documentation "The set of neurons making up the neural network"))
+  (:documentation "the neural network"))
+
+;;; ---------------------------------------------------------------------------
+(defun make-neural-network (&key number-of-connections)
+  (initialize-instance 'neural-network
+                       :neurons (make-array number-of-connections
+                                            :element-type 'neuron)))
+
+;;; ---------------------------------------------------------------------------
 (defclass hill-climber ()
   ((parent :initarg :parent
          :initform (error ":parent must be specified")
