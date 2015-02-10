@@ -104,12 +104,11 @@ feed-forward, a simpler neuron model can be used."))
 
 ;;; ---------------------------------------------------------------------------
 (defun make-neuron (&key incomming-connections-size)
-  (initialize-instance 'make-neuron
+  (initialize-instance 'neuron
                        :value 0
                        :new-value 0
                        :incomming-connections
-                       (make-vector-individual :size incomming-connections-size)
-                       ))
+                       (make-vector-individual :size incomming-connections-size)))
 
 ;;; ---------------------------------------------------------------------------
 (defclass hill-climber ()
