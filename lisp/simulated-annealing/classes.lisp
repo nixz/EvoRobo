@@ -113,7 +113,8 @@ feed-forward, a simpler neuron model can be used."))
 ;;; ---------------------------------------------------------------------------
 (defclass neural-network (individual)
   ((neurons :initarg :neurons
-         :initform nil
+            :initform nil
+            :accessor neurons
          :allocation :instance
          :documentation "The set of neurons making up the neural network"))
   (:documentation "the neural network"))
