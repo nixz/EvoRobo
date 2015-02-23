@@ -7,32 +7,58 @@
  * This is the main file for homework 1.
  */
 
+#define _CHECKER
+// #undef  _CHECKER
+
 #define _USE_MATH_DEFINES
 #include <iostream>
 #include <fstream>
 #include <math.h>
 
-/* Assignment 2 */
+/* Assignment 3 */
 #include "NeuralNetwork.hpp"
+#include "HillClimber.hpp"
+
+#ifdef _CHECKER
+#include "NNCheckerboardFitness.hpp"
+#else
+#include "NNLastRowFitness.hpp"
+#endif
+
 
 int main(int argc, char* argv[]) {
-    NeuralNetwork network( 10 );
-    network.randomize();
-    std::ofstream networkFile("hw2_network.csv");
-    networkFile << network << "\n";
-    networkFile.close();
+    seed( 9 );
+    NeuralNetwork network( 10 , 0.05 );
+#ifdef _CHECKER
+    NNCheckerboardFitness fitnessFunction;
+    HillClimber<NeuralNetwork, NNCheckerboardFitness> hillClimberNN;
+#else
+    NNLastRowFitness fitnessFunction;
+    HillClimber<NeuralNetwork, NNLastRowFitness> hillClimberNN;
+#endif
 
-    std::ofstream activationFile("hw2_activation.csv");
-    // Initiate the network with random values
-    for (int i=0; i < network.getNeurons().size(); i++) {
-        network.getNeurons()[i].setValue( randDouble());
-    }
-    // Run the network for 50 time steps and log the activation
-    for (int i=0; i < 50; i++) {
-        network.step();
-        network.logActivation( activationFile );
-    }
+    hillClimberNN.init( network, fitnessFunction );
 
+    // Pre Activation
+    hillClimberNN.getParent().init( 0.5 );
+    std::ofstream preActivationFile("hw3_preActivation.csv");
+    for (int i=0; i < 10; i++) {
+        hillClimberNN.getParent().step();
+        hillClimberNN.getParent().logActivation( preActivationFile );
+    }
+    preActivationFile.close();
+
+    // Evolve
+    hillClimberNN.run( 1000, "hw3.fitness.csv", "hw3_individual.csv" );
+
+    // Post activation
+    hillClimberNN.getParent().init( 0.5 );
+    std::ofstream postActivationFile("hw3_postActivation.csv");
+    for (int i=0; i < 10; i++) {
+        hillClimberNN.getParent().step();
+        hillClimberNN.getParent().logActivation( postActivationFile );
+    }
+    postActivationFile.close();
 
     return 0;
 }
