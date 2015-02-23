@@ -8,7 +8,7 @@
 #ifndef NNLASTROWFITNESS_HPP_
 #define NNLASTROWFITNESS_HPP_
 
-#include <math.h>
+#include <cmath>
 
 class NNLastRowFitness
 {
@@ -26,8 +26,17 @@ public:
      * 1 - average_absolute_difference
      */
     void evaluate(NeuralNetwork& individual){
-        /* TODO: YOUR CODE HERE */
+        double fitness = 0;
+        individual.init( 0.5 );
+        for (int i=0; i < 10; i++) {
+            individual.step();
+        }
+        for (int i =0 ; i < individual.size(); i++) {
+            fitness += abs ( individual.getNeurons()[i].getValue() - i%2 );
+        }
 
+        fitness = 1.0 - ( fitness/individual.size() );
+        individual.setFitness( fitness );
     }
 
     /* TODO: MORE CODE HERE IF YOU WANT*/
