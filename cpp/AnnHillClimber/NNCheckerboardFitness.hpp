@@ -35,12 +35,23 @@ public:
      * Normalize the result by dividing it by the maximum possible summed difference (should be 180).
      */
     void evaluate(NeuralNetwork& individual){
-        /* TODO: YOUR CODE HERE */
+        double fitness = 0, f1=0, f2=0;
+        individual.init( 0.5 );
+        for (int i=0; i < 10; i++) {
+            individual.step();
+            for (int i=0; i < individual.size()-1; i++) {
+                f1 += fabs( individual.getNeurons()[i].getValue() -
+                            individual.getNeurons()[i+1].getValue() );
+            }
+            for (int i=0; i < individual.size(); i++) {
+                f2 += fabs( individual.getNeurons()[i].getValue() -
+                            individual.getPreviousActivations()[i] );
+            }
 
+            fitness = ( f1+f2 )/180; // hard coding to 180 (10*9) *2
+            individual.setFitness( fitness );
+        }
     }
-
-    /* TODO: MORE CODE HERE IF YOU WANT*/
-
 };
 
 
