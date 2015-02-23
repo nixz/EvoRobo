@@ -109,10 +109,11 @@ public:
      * meaning that every neuron has a number of incoming connections equal to
      * the number of neurons in the network.
      */
-    NeuralNetwork(size_t numberOfNeurons = 0){
+    NeuralNetwork(size_t numberOfNeurons = 0, double mutationRate = 0.05){
         for (int i = 0; i < numberOfNeurons; i++) {
             _neurons.push_back(Neuron( numberOfNeurons ));
         }
+        _mutationRate = mutationRate;
     }
 
 
@@ -197,6 +198,7 @@ public:
 
 private:
     std::vector<Neuron> _neurons;
+    double _mutationRate;
 };
 
 
