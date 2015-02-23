@@ -196,6 +196,21 @@ public:
 
     //TODO: MORE CODE HERE IF YOU WANT
 
+    /**
+     * Initiate all the neurons to one value
+     */
+    void init(double val){
+        for (int i =0 ; i < _neurons.size(); i++) {
+            _neurons[i].setValue( val );
+        }
+    }
+
+    /**
+     * returns the size of the neurons in the network
+     */
+     int size(){
+         return _neurons.size();
+     }
 private:
     std::vector<Neuron> _neurons;
     double _mutationRate;
