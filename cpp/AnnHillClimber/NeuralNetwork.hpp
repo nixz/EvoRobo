@@ -186,6 +186,21 @@ public:
         }
     }
 
+    /**
+     * Mutates the vector.
+     *
+     * Implement such that each element in the vector has a _mutationRate chance
+     * of being re-assigned a value between -1 and 1.
+     */
+    void mutate(){
+        for (int i = 0; i < _neurons.size() ; i++) {
+            for (int j = 0; j < _neurons.size(); j++) {
+                if(randDouble() < _mutationRate){
+                    _neurons[i].setConnection( j, randDouble( -1, 1 ) );
+                }
+            }
+        }
+    }
 
     /**
      * Returns a reference to the vector of neurons of this network.
