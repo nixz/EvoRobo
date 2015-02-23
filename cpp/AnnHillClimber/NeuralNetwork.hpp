@@ -114,6 +114,7 @@ public:
             _neurons.push_back(Neuron( numberOfNeurons ));
         }
         _mutationRate = mutationRate;
+        _previousActivation.resize( numberOfNeurons );
     }
 
 
@@ -137,6 +138,7 @@ public:
      * update the current value.
      */
     void step(){
+        copyPreviousActivation();
         for (int i =0 ; i < _neurons.size(); i++) {
             double sum = 0.0;
             for (int j=0; j < _neurons.size(); j++) {
@@ -209,7 +211,12 @@ public:
         return _neurons;
     }
 
-    //TODO: MORE CODE HERE IF YOU WANT
+    /**
+     * Get previous activations of the network
+     */
+    std::vector<double>& getPreviousActivations() {
+        return _previousActivation;
+    }
 
     /**
      * Initiate all the neurons to one value
@@ -226,8 +233,18 @@ public:
      int size(){
          return _neurons.size();
      }
+
+    /**
+     * Copying the previous activations into _previousActivation vector
+     */
+    void copyPreviousActivation() {
+        for (int i =0 ; i < _neurons.size(); i++) {
+            _previousActivation[i] = _neurons[i].getValue();
+        }
+    }
 private:
     std::vector<Neuron> _neurons;
+    std::vector<double> _previousActivation;
     double _mutationRate;
 };
 
